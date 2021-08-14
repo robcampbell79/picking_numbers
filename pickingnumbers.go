@@ -6,38 +6,37 @@ import(
 
 func main() {
 	a := []int32{5,4,6,5,3,3,1,2,3,9,3,4,5,5,6}
+	//{1,1,1,2,2,2,4,4,4,4,4}
 
 	fmt.Println(pickingNumbers(a))
 }
 
 func pickingNumbers(a []int32) int32 {
 	matches := repeatNumbers(a)
-	//var num int32
-	//var subArr []int32
-
+	
 	var lrg int32 = 0
-	//var tmp int32 = 0
-	//lrgst := []int32{}
-	var count int32 = 0
+	var add int32 = 0
 	
 	for i := 0; i < len(matches); i++ {
 		newI := fmt.Sprintf("%d", i)
-		fmt.Println(matches["p"+newI])
-		lrg = matches["p0"][1]
-		if matches["p"+newI][1] > lrg {
-			lrg = matches["p"+newI][1]
+		newIPl := fmt.Sprintf("%d", i+1)
+		sub := matches["p"+newI][0] - matches["p"+newIPl][0]
+		if sub < 0  {
+			sub = sub * -1
+		}
+
+		if sub <= 1 {
+			add = matches["p"+newI][1] + matches["p"+newIPl][1]
+		}
+
+		if add > lrg {
+			lrg = add
 		}
 	}
+
+
 
 	fmt.Println("lrg: ", lrg)
-
-	for _, x := range matches {
-		if x[1] == lrg {
-			count++
-		}
-	}
-
-	fmt.Println("count: ", count)
 
 	fmt.Println(matches)
 
